@@ -240,7 +240,7 @@
 				var label = this.getAttribute('data-nav') || key + 1;
 
 				//  Listen to any callback functions
-				if($.isFunction(self.options.nav)) {
+				if(typeof self.options.nav === 'function') {
 					label = self.options.nav.call(self.$slides.eq(key), key, label);
 				}
 
@@ -293,7 +293,7 @@
 			$(document).on('keyup' + self.eventSuffix, function(e) {
 				$.each(self.options.keys, function(key, val) {
 					if(e.which === val) {
-						$.isFunction(self[key]) && self[key].call(self);
+						typeof self[key] === 'function' && self[key].call(self);
 					}
 				});
 			});
@@ -441,7 +441,7 @@
 
 			//  Make sure it's a valid animation method, otherwise we'll get
 			//  a load of bug reports that'll be really hard to report
-			if($.isFunction(self[fn])) {
+			if(typeof self[fn] === 'function') {
 				self[fn](self.current, dir);
 			}
 
@@ -639,7 +639,7 @@
 				var call = $this.data('unslider')[opts[0]];
 
 				//  Do we have arguments to pass to the string-function?
-				if($.isFunction(call)) {
+				if(typeof call === 'function') {
 					return call.apply($this, opts[1] ? opts[1].split(',') : null);
 				}
 			}
